@@ -5,6 +5,15 @@ import pandas as pd
 
 PATTERN = "StanRachunkuRejestrowego_*.xls"
 
+DTYPES = {
+    "EMISJA": "string",
+    "DOSTĘPNA LICZBA OBLIGACJI": "int64",
+    "ZABLOKOWANA LICZBA OBLIGACJI": "int64",
+    "WARTOŚĆ NOMINALNA": "float64",
+    "WARTOŚĆ AKTUALNA": "float64",
+    "DATA WYKUPU": "datetime64[ns]",
+}
+
 
 def find_all(directory: Path) -> list[Path]:
     return list(directory.rglob(PATTERN))
@@ -15,8 +24,9 @@ def find_latest(directory: Path) -> Path:
 
 
 def read(path: Path):
-    df = pd.read_excel(path)
+    df = pd.read_excel(path, dtype=DTYPES)
     print(df)
+    print(df.info())
 
 
 if __name__ == "__main__":
