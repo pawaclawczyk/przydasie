@@ -1,0 +1,9 @@
+version: '3'
+
+tasks:
+  fmt:
+    cmds:
+      - poetry run black .
+  run:
+    cmds:
+      - poetry run python obligacje/obligacje.py data/
